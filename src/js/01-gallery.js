@@ -10,6 +10,7 @@
 
 
 import {galleryItems} from "./gallery-items.js";
+console.log(galleryItems);
 
 const galleryEl = document.querySelector(".gallery");
 const markup = galleryItems.map(item => 
@@ -29,17 +30,17 @@ const markup = galleryItems.map(item =>
 
   function onClick (event){
     event.preventDefault();
-    if(!event.target.classList.contains("gallery__image")){
+    if(event.target.nodeName !== "IMG"){
         return;
     }
 
     const instance = basicLightbox.create(`<img src="${event.target.dataset.source}" width="800" height="600">`, 
     {
         onShow: () => {
-            document.addEventListener("keydown", onKeydown);
+            window.addEventListener("keydown", onKeydown);
         },
         onClose: () => {
-            document.addEventListener("keydown", onKeydown);
+            window.addEventListener("keydown", onKeydown);
         },
     });
     instance.show();
